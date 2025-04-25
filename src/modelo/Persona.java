@@ -1,4 +1,5 @@
 package modelo;
+import interfaces.ILista;
 
 public class Persona {
 	
@@ -6,7 +7,8 @@ public class Persona {
 	private String nombre;
 	//Lo más importante del TP
 	//anidado por medio de un array Vehiculo[3]
-	private Lista listaVehiculos;
+	private ILista listaVehiculos;
+	
 	
 	
 	public int getDni() {
@@ -38,7 +40,7 @@ public class Persona {
 		return "Persona [dni=" + dni + ", nombre=" + nombre +"]";
 	}
 	
-	public Lista getListaVehiculos() {
+	public ILista getListaVehiculos() {
 		return listaVehiculos;
 	}
 	public void setListaVehiculos(Lista listaVehiculos) {

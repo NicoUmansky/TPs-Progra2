@@ -1,49 +1,60 @@
 package modelo;
 
-;
+import interfaces.INodo;
 
-public class Nodo  {
-    //private int dato;
-	private Vehiculo dato;
-    private Nodo siguiente; //INodo
-    private Nodo anterior; 
+public class Nodo implements INodo {
+    // Atributos
+    private Vehiculo dato;
+    private INodo siguiente;
+    private INodo anterior;
 
+    // Constructores
     public Nodo(Vehiculo dato) {
         this.dato = dato;
         this.siguiente = null;
         this.anterior = null;
     }
 
-    
-    public Vehiculo getDato() {
+    public Nodo(Vehiculo dato, INodo siguiente, INodo anterior) {
+        this.dato = dato;
+        this.siguiente = siguiente;
+        this.anterior = anterior;
+    }
+
+    // Métodos (Getter/Setter)
+    @Override
+    public Vehiculo getDato() { // Cambiado para devolver un objeto Vehiculo
         return dato;
     }
 
-  
-    public void setDato(Vehiculo dato) {
+    @Override
+    public void setDato(Vehiculo dato) { // Cambiado para aceptar un objeto Vehiculo
         this.dato = dato;
     }
 
-    
-    public Nodo getSiguiente() {
+    @Override
+    public INodo getSiguiente() {
         return siguiente;
     }
 
-   
-    public void setSiguiente(Nodo nodo) {
+    @Override
+    public void setSiguiente(INodo nodo) {
         this.siguiente = nodo;
     }
 
-    public Nodo getAnterior() {
+    @Override
+    public INodo getAnterior() {
         return anterior;
     }
 
-    public void setAnterior(Nodo anterior) {
+    @Override
+    public void setAnterior(INodo anterior) {
         this.anterior = anterior;
     }
+
+
+    @Override
+    public String toString() {
+        return "Nodo [dato=" + dato + "]"  ;
+    }
 }
-
-
-
-
-//iriarte
