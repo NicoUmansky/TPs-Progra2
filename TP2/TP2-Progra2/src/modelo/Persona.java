@@ -2,9 +2,9 @@ package modelo;
 
 public class Persona { // Clase Persona
     private String nombere;
-    private String dni;
+    private int dni;
 
-    public Persona(String nombere, String dni) { // Constructor de la clase Persona
+    public Persona(String nombere, int dni) { // Constructor de la clase Persona
         this.nombere = nombere;
         this.dni = dni;
     }
@@ -19,11 +19,11 @@ public class Persona { // Clase Persona
         this.nombere = nombere;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
