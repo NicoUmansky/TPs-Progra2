@@ -4,7 +4,7 @@ import interfaces.INodo;
 public class ArbolBinario implements IArbolBinario {
 
     private INodo<Persona> raiz;
-    private final String criterioComparacion;
+    private String criterioComparacion;
 
     public ArbolBinario(String criterio) {
         this.raiz = null;
@@ -221,5 +221,21 @@ public class ArbolBinario implements IArbolBinario {
             recorridoPostOrdenRecursivo(INodo.getderecha());
             System.out.print(INodo.getDato() + " | "); //
         }
+    }
+
+    public INodo<Persona> getRaiz() {
+        return raiz;
+    }
+
+    public void setRaiz(INodo<Persona> raiz) {
+        this.raiz = raiz;
+    }
+
+    public String getCriterioComparacion() {
+        return criterioComparacion;
+    }
+
+    public void setCriterioComparacion(String criterioComparacion) {
+        this.criterioComparacion = criterioComparacion;
     }
 }
