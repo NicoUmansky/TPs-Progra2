@@ -12,27 +12,24 @@ public class Nodo<T> implements INodo<T> {
         this.izquierda = null;
     }
     //Getters y Setters
-
+    @Override
     public T getDato() {
         return dato;
     }
-
+    @Override
     public void setDato(T dato) {
         this.dato = dato;
     }
-
+    @Override
     public INodo<T> getderecha() {
         return derecha;
     }
-
-    public void setderecha(Nodo<T> derecha) {
-        this.derecha = derecha;
-    }
-
+    
+    @Override
     public INodo<T> getizquierda() {
         return izquierda;
     }
-
+    @Override
     public void setizquierda(INodo<T> izquierda) {
         this.izquierda = izquierda;
     }
