@@ -38,7 +38,14 @@ public class ArbolBinario implements IArbolBinario {
         // Si ninguno es nulo, procede con la comparación normal por criterio
         if ("dni".equals(this.criterioComparacion)) {
             // return p1.getDni().compareTo(p2.getDni()); //
-            return p1.getDni();
+            if (p1.getDni() < p2.getDni()) {
+                return -1; // p1 es menor que p2
+            } else if (p1.getDni() > p2.getDni()) {
+                return 1; // p1 es mayor que p2
+            } else {
+                return 0; // Son iguales
+            }
+
         } else {
             return p1.getNombere().compareTo(p2.getNombere()); //
         }
