@@ -4,30 +4,30 @@ import modelo.ArbolBinario;
 import modelo.Persona;
 
 public class testEliminar {
-    // Método auxiliar para poblar el árbol y mostrarlo
+    // Método auxiliar para poblar el Arbol y mostrarlo
     private static void poblarYMostrar(ArbolBinario arbol, Persona[] personas, String titulo) {
         System.out.println("\n--- " + titulo + " ---");
         for (Persona p : personas) {
             arbol.insertar(p);
         }
-        System.out.println("Estado inicial del árbol (En Orden):");
+        System.out.println("Estado inicial del Arbol (En Orden):");
         arbol.mostrarRecorridoEnOrden();
     }
 
     public static void main(String[] args) {
-        System.out.println("--- PRUEBAS DE ELIMINACIÓN EN ÁRBOL BINARIO ---");
+        System.out.println("--- PRUEBAS DE ELIMINACION EN Arbol BINARIO ---");
 
         Persona[] personasIniciales = {
             new Persona("Laura", 20123456), new Persona("Carlos", 18765432),
             new Persona("Ana", 30987654), new Persona("Pedro", 15123123),
             new Persona("Sofia", 22345678), new Persona("Luis", 10543210),
             new Persona("Jorge", 12121212), new Persona("Valeria", 35678901),
-            new Persona("Mateo", 45112233) // Usado para prueba de eliminación de hoja
+            new Persona("Mateo", 45112233) // Usado para prueba de ELIMINACION de hoja
         };
 
-        // --- Test de eliminación en árbol por DNI ---
+        // --- Test de ELIMINACION en Arbol por DNI ---
         ArbolBinario arbolDni = new ArbolBinario("dni");
-        poblarYMostrar(arbolDni, personasIniciales, "ÁRBOL POR DNI PARA ELIMINACIÓN");
+        poblarYMostrar(arbolDni, personasIniciales, "Arbol POR DNI PARA ELIMINACION");
 
         // Caso 1: Eliminar nodo hoja (Mateo DNI: 45112233)
         System.out.println("\nEliminando nodo hoja (Mateo, DNI 45112233):");
@@ -51,13 +51,7 @@ public class testEliminar {
         arbolDni.eliminar(new Persona("NoExiste", 99999999));
         arbolDni.mostrarRecorridoEnOrden(); // No debería cambiar
 
-        System.out.println("\n--- FIN PRUEBAS DE ELIMINACIÓN (DNI) ---");
+        System.out.println("\n--- FIN PRUEBAS DE ELIMINACION (DNI) ---");
 
-
-        // --- Test de eliminación en árbol por Nombre ---
-        // (Puedes añadir una lógica similar para el árbol por Nombre)
-        // ArbolBinario arbolNombre = new ArbolBinario("nombre");
-        // poblarYMostrar(arbolNombre, personasIniciales, "ÁRBOL POR NOMBRE PARA ELIMINACIÓN");
-        // ... realizar eliminaciones por nombre ...
     }
 }

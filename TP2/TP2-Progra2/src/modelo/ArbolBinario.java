@@ -22,6 +22,7 @@ public class ArbolBinario implements IArbolBinario {
     }
     // --- Método de Comparación ---
 
+    @Override
     public int compararPersonas(Persona p1, Persona p2) {
         if (p1 == null && p2 == null) {
             return 0; // Ambos son nulos, se consideran iguales en este contexto.
