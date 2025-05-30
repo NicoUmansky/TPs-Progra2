@@ -16,6 +16,7 @@ public class ArbolBinario implements IArbolBinario {
         }
     }
 
+    @Override
     public boolean estaVacio() {
         return this.raiz == null;
     }
@@ -52,6 +53,7 @@ public class ArbolBinario implements IArbolBinario {
     }
 
     // --- Métodos de Inserción ---
+    @Override
     public void insertar(Persona persona) {
         if (persona == null) {
             System.out.println("No se puede insertar un valor nulo.");
@@ -83,6 +85,7 @@ public class ArbolBinario implements IArbolBinario {
     }
 
     // --- Métodos de Búsqueda ---
+    @Override
     public Persona buscar(Persona personaClave) {
         if (personaClave == null) {
             System.out.println("No se puede buscar una persona nula.");
@@ -108,6 +111,7 @@ public class ArbolBinario implements IArbolBinario {
     }
 
     // --- Métodos de Eliminación ---
+    @Override
     public void eliminar(Persona personaAEliminar) {
         if (personaAEliminar == null) {
             System.out.println("No se puede eliminar un valor nulo.");
@@ -160,6 +164,7 @@ public class ArbolBinario implements IArbolBinario {
 
     // --- Métodos de Recorrido (imprimiendo en consola) ---
 
+    @Override
     public void mostrarRecorridoEnOrden() {
         System.out.print("En Orden (" + this.criterioComparacion + "): ");
         if (estaVacio()) {
@@ -178,6 +183,7 @@ public class ArbolBinario implements IArbolBinario {
         }
     }
 
+    @Override
     public void mostrarRecorridoPreOrden() {
         System.out.print("Pre Orden (" + this.criterioComparacion + "): ");
         if (estaVacio()) {
@@ -196,6 +202,7 @@ public class ArbolBinario implements IArbolBinario {
         }
     }
 
+    @Override
     public void mostrarRecorridoPostOrden() {
         System.out.print("Post Orden (" + this.criterioComparacion + "): ");
         if (estaVacio()) {
