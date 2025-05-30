@@ -31,8 +31,8 @@ public interface IArbolBinario {
      *   - compararPersonas(null, null) == 0
      *   - compararPersonas(null, p) < 0
      *   - compararPersonas(p, null) > 0
-     *   - Si criterio == "dni", compararPersonas(p1, p2) == p1.getDni().compareTo(p2.getDni())
-    *   - Si criterio == "nombre", compararPersonas(p1, p2) == p1.getNombere().compareTo(p2.getNombere())
+     *   - Si criterio == "dni", compararPersonas(p1, p2) == p1.getDni() < (p2.getDni())
+    *   - Si criterio == "nombre", compararPersonas(p1, p2) == p1.getnombre().compareTo(p2.getnombre())
     */
     public int compararPersonas(Persona p1, Persona p2);
 

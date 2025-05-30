@@ -1,22 +1,22 @@
 package modelo;
 import interfaces.IPersona;
 public class Persona implements IPersona{ // Clase Persona
-    private String nombere;
+    private String nombre;
     private int dni;
 
-    public Persona(String nombere, int dni) { // Constructor de la clase Persona
-        this.nombere = nombere;
+    public Persona(String nombre, int dni) { // Constructor de la clase Persona
+        this.nombre = nombre;
         this.dni = dni;
     }
 
     //Getters y Setters
     @Override
     public String getNombre() {
-        return nombere;
+        return nombre;
     }
     @Override
-    public void setNombre(String nombere) {
-        this.nombere = nombere;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     @Override
     public int getDni() {
@@ -31,7 +31,7 @@ public class Persona implements IPersona{ // Clase Persona
 
     @Override
     public String toString() {
-        return "Persona [nombere=" + nombere + ", dni=" + dni + "]";
+        return "Persona [nombre=" + nombre + ", dni=" + dni + "]";
     }
 
 }

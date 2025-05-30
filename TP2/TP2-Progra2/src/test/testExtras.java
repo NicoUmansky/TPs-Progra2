@@ -17,11 +17,6 @@ public class testExtras {
         arbol.insertar(new Persona("Alguien", 123));
         System.out.println("Después de insertar un elemento, ¿el árbol está vacío? " + (arbol.estaVacio() ? "Sí (Error)" : "No (Correcto)"));
 
-        // Si tuvieras un método vaciarArbol(), lo probarías aquí
-        // arbol.vaciarArbol(); // Método hipotético
-        // System.out.println("Después de vaciar, ¿el árbol está vacío? " + arbol.estaVacio());
-
-
         // --- Prueba de inserción de duplicados (verificar que no se inserten y se muestre mensaje) ---
         System.out.println("\n--- Probando inserción de duplicados (DNI) ---");
         ArbolBinario arbolDuplicadosDni = new ArbolBinario("dni");
