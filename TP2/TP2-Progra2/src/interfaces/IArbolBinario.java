@@ -24,6 +24,20 @@ public interface IArbolBinario {
     public Persona buscar(Persona personaClave);
 
     /**
+    * PRE: El árbol debe tener definido un criterio de comparación ("dni" o "nombre").
+    * POST: Devuelve un valor entero que indica la comparación entre p1 y p2:
+    *       negativo si p1 < p2, 0 si son iguales, positivo si p1 > p2.
+    * AXIOMA:
+     *   - compararPersonas(null, null) == 0
+     *   - compararPersonas(null, p) < 0
+     *   - compararPersonas(p, null) > 0
+     *   - Si criterio == "dni", compararPersonas(p1, p2) == p1.getDni().compareTo(p2.getDni())
+    *   - Si criterio == "nombre", compararPersonas(p1, p2) == p1.getNombere().compareTo(p2.getNombere())
+    */
+    public int compararPersonas(Persona p1, Persona p2);
+
+
+    /**
      * PRE: personaAEliminar no debe ser null.
      * POST: Si existe una persona con el mismo dato clave, se elimina del árbol.
      * AXIOMA: insertar(x); eliminar(x); buscar(x) == null.
