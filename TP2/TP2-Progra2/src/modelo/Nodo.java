@@ -24,7 +24,7 @@ public class Nodo<T> implements INodo<T> {
     public INodo<T> getderecha() {
         return derecha;
     }
-    
+
     @Override
     public INodo<T> getizquierda() {
         return izquierda;

@@ -20,8 +20,9 @@ public class ArbolBinario implements IArbolBinario {
     public boolean estaVacio() {
         return this.raiz == null;
     }
+    // --- Método de Comparación ---
 
-    private int compararPersonas(Persona p1, Persona p2) {
+    public int compararPersonas(Persona p1, Persona p2) {
         if (p1 == null && p2 == null) {
             return 0; // Ambos son nulos, se consideran iguales en este contexto.
         }
@@ -48,7 +49,7 @@ public class ArbolBinario implements IArbolBinario {
             }
 
         } else {
-            return p1.getNombere().compareTo(p2.getNombere()); //
+            return p1.getNombre().compareTo(p2.getNombre()); //
         }
     }
 

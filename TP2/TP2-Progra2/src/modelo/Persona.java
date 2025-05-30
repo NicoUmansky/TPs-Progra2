@@ -1,6 +1,6 @@
 package modelo;
-
-public class Persona { // Clase Persona
+import interfaces.IPersona;
+public class Persona implements IPersona{ // Clase Persona
     private String nombere;
     private int dni;
 
@@ -10,19 +10,19 @@ public class Persona { // Clase Persona
     }
 
     //Getters y Setters
-
-    public String getNombere() {
+    @Override
+    public String getNombre() {
         return nombere;
     }
-
-    public void setNombere(String nombere) {
+    @Override
+    public void setNombre(String nombere) {
         this.nombere = nombere;
     }
-
+    @Override
     public int getDni() {
         return dni;
     }
-
+    @Override
     public void setDni(int dni) {
         this.dni = dni;
     }
