@@ -1,8 +1,9 @@
 package modelo;
+import interfaces.IArbolBinario;
+import interfaces.INodo;
+public class ArbolBinario implements IArbolBinario {
 
-public class ArbolBinario {
-
-    private Nodo<Persona> raiz;
+    private INodo<Persona> raiz;
     private final String criterioComparacion;
 
     public ArbolBinario(String criterio) {
@@ -36,7 +37,8 @@ public class ArbolBinario {
 
         // Si ninguno es nulo, procede con la comparación normal por criterio
         if ("dni".equals(this.criterioComparacion)) {
-            return p1.getDni().compareTo(p2.getDni()); //
+            // return p1.getDni().compareTo(p2.getDni()); //
+            return p1.getDni();
         } else {
             return p1.getNombere().compareTo(p2.getNombere()); //
         }
@@ -51,26 +53,26 @@ public class ArbolBinario {
         this.raiz = insertarRecursivo(this.raiz, persona);
     }
 
-    private Nodo<Persona> insertarRecursivo(Nodo<Persona> nodoActual, Persona personaAInsertar) {
-        if (nodoActual == null) {
-            // Asumiendo que Nodo tiene un constructor que toma el dato y
+    private INodo<Persona> insertarRecursivo(INodo<Persona> INodoActual, Persona personaAInsertar) {
+        if (INodoActual == null) {
+            // Asumiendo que INodo tiene un constructor que toma el dato y
             // que izquierda y derecha se inicializan a null por defecto.
             return new Nodo<>(personaAInsertar); //
         }
 
-        // Asumiendo que Nodo.java tiene getDato()
-        int comparacion = compararPersonas(personaAInsertar, nodoActual.getDato()); //
+        // Asumiendo que INodo.java tiene getDato()
+        int comparacion = compararPersonas(personaAInsertar, INodoActual.getDato()); //
 
         if (comparacion < 0) {
-            // Asumiendo que Nodo.java tiene getizquierda() y setizquierda()
-            nodoActual.setizquierda(insertarRecursivo(nodoActual.getizquierda(), personaAInsertar));
+            // Asumiendo que INodo.java tiene getizquierda() y setizquierda()
+            INodoActual.setizquierda(insertarRecursivo(INodoActual.getizquierda(), personaAInsertar));
         } else if (comparacion > 0) {
-            // Asumiendo que Nodo.java tiene getderecha() y setderecha()
-            nodoActual.setderecha(insertarRecursivo(nodoActual.getderecha(), personaAInsertar));
+            // Asumiendo que INodo.java tiene getderecha() y setderecha()
+            INodoActual.setderecha(insertarRecursivo(INodoActual.getderecha(), personaAInsertar));
         } else {
             System.out.println("Elemento duplicado según el criterio '" + this.criterioComparacion + "': " + personaAInsertar);
         }
-        return nodoActual;
+        return INodoActual;
     }
 
     // --- Métodos de Búsqueda ---
@@ -79,22 +81,22 @@ public class ArbolBinario {
             System.out.println("No se puede buscar una persona nula.");
             return null;
         }
-        Nodo<Persona> nodoEncontrado = buscarRecursivo(this.raiz, personaClave);
-        return (nodoEncontrado == null) ? null : nodoEncontrado.getDato(); //
+        INodo<Persona> INodoEncontrado = buscarRecursivo(this.raiz, personaClave);
+        return (INodoEncontrado == null) ? null : INodoEncontrado.getDato(); //
     }
 
-    private Nodo<Persona> buscarRecursivo(Nodo<Persona> nodoActual, Persona personaClave) {
-        if (nodoActual == null) {
+    private INodo<Persona> buscarRecursivo(INodo<Persona> INodoActual, Persona personaClave) {
+        if (INodoActual == null) {
             return null;
         }
-        int comparacion = compararPersonas(personaClave, nodoActual.getDato()); //
+        int comparacion = compararPersonas(personaClave, INodoActual.getDato()); //
 
         if (comparacion < 0) {
-            return buscarRecursivo(nodoActual.getizquierda(), personaClave);
+            return buscarRecursivo(INodoActual.getizquierda(), personaClave);
         } else if (comparacion > 0) {
-            return buscarRecursivo(nodoActual.getderecha(), personaClave);
+            return buscarRecursivo(INodoActual.getderecha(), personaClave);
         } else {
-            return nodoActual; // Elemento encontrado
+            return INodoActual; // Elemento encontrado
         }
     }
 
@@ -107,23 +109,23 @@ public class ArbolBinario {
         this.raiz = eliminarRecursivo(this.raiz, personaAEliminar);
     }
 
-    private Nodo<Persona> eliminarRecursivo(Nodo<Persona> nodoActual, Persona personaAEliminar) {
-        if (nodoActual == null) {
+    private INodo<Persona> eliminarRecursivo(INodo<Persona> INodoActual, Persona personaAEliminar) {
+        if (INodoActual == null) {
             System.out.println("Elemento no encontrado para eliminar: " + personaAEliminar);
             return null;
         }
-        int comparacion = compararPersonas(personaAEliminar, nodoActual.getDato()); //
+        int comparacion = compararPersonas(personaAEliminar, INodoActual.getDato()); //
 
         if (comparacion < 0) {
-            nodoActual.setizquierda(eliminarRecursivo(nodoActual.getizquierda(), personaAEliminar));
+            INodoActual.setizquierda(eliminarRecursivo(INodoActual.getizquierda(), personaAEliminar));
         } else if (comparacion > 0) {
-            nodoActual.setderecha(eliminarRecursivo(nodoActual.getderecha(), personaAEliminar));
+            INodoActual.setderecha(eliminarRecursivo(INodoActual.getderecha(), personaAEliminar));
         } else {
-            // Nodo encontrado, proceder con la eliminación
-            Nodo<Persona> hijoIzquierdo = nodoActual.getizquierda();
-            Nodo<Persona> hijoDerecho = nodoActual.getderecha();
+            // INodo encontrado, proceder con la eliminación
+            INodo<Persona> hijoIzquierdo = INodoActual.getizquierda();
+            INodo<Persona> hijoDerecho = INodoActual.getderecha();
 
-            if (hijoIzquierdo == null && hijoDerecho == null) { // Caso 1: Nodo hoja
+            if (hijoIzquierdo == null && hijoDerecho == null) { // Caso 1: INodo hoja
                 return null;
             }
             if (hijoIzquierdo == null) { // Caso 2: Solo hijo derecho
@@ -133,16 +135,16 @@ public class ArbolBinario {
                 return hijoIzquierdo;
             }
             
-            // Caso 3: Nodo con dos hijos
+            // Caso 3: INodo con dos hijos
             Persona sucesorDato = encontrarMinimo(hijoDerecho).getDato(); //
-            nodoActual.setDato(sucesorDato); //
-            nodoActual.setderecha(eliminarRecursivo(hijoDerecho, sucesorDato));
+            INodoActual.setDato(sucesorDato); //
+            INodoActual.setderecha(eliminarRecursivo(hijoDerecho, sucesorDato));
         }
-        return nodoActual;
+        return INodoActual;
     }
 
-    private Nodo<Persona> encontrarMinimo(Nodo<Persona> nodo) {
-        Nodo<Persona> actual = nodo;
+    private INodo<Persona> encontrarMinimo(INodo<Persona> INodo) {
+        INodo<Persona> actual = INodo;
         while (actual.getizquierda() != null) {
             actual = actual.getizquierda();
         }
@@ -161,11 +163,11 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void recorridoEnOrdenRecursivo(Nodo<Persona> nodo) {
-        if (nodo != null) {
-            recorridoEnOrdenRecursivo(nodo.getizquierda());
-            System.out.print(nodo.getDato() + " | "); //
-            recorridoEnOrdenRecursivo(nodo.getderecha());
+    private void recorridoEnOrdenRecursivo(INodo<Persona> INodo) {
+        if (INodo != null) {
+            recorridoEnOrdenRecursivo(INodo.getizquierda());
+            System.out.print(INodo.getDato() + " | "); //
+            recorridoEnOrdenRecursivo(INodo.getderecha());
         }
     }
 
@@ -179,11 +181,11 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void recorridoPreOrdenRecursivo(Nodo<Persona> nodo) {
-        if (nodo != null) {
-            System.out.print(nodo.getDato() + " | "); //
-            recorridoPreOrdenRecursivo(nodo.getizquierda());
-            recorridoPreOrdenRecursivo(nodo.getderecha());
+    private void recorridoPreOrdenRecursivo(INodo<Persona> INodo) {
+        if (INodo != null) {
+            System.out.print(INodo.getDato() + " | "); //
+            recorridoPreOrdenRecursivo(INodo.getizquierda());
+            recorridoPreOrdenRecursivo(INodo.getderecha());
         }
     }
 
@@ -197,11 +199,11 @@ public class ArbolBinario {
         System.out.println();
     }
 
-    private void recorridoPostOrdenRecursivo(Nodo<Persona> nodo) {
-        if (nodo != null) {
-            recorridoPostOrdenRecursivo(nodo.getizquierda());
-            recorridoPostOrdenRecursivo(nodo.getderecha());
-            System.out.print(nodo.getDato() + " | "); //
+    private void recorridoPostOrdenRecursivo(INodo<Persona> INodo) {
+        if (INodo != null) {
+            recorridoPostOrdenRecursivo(INodo.getizquierda());
+            recorridoPostOrdenRecursivo(INodo.getderecha());
+            System.out.print(INodo.getDato() + " | "); //
         }
     }
 }

@@ -1,9 +1,10 @@
-package modelo;
+package modelo; 
+import interfaces.INodo;
 
-public class Nodo <T> {
+public class Nodo<T> implements INodo<T> {
     T dato;
-    Nodo<T> derecha;
-    Nodo<T> izquierda;
+    INodo<T> derecha;
+    INodo<T> izquierda;
     
     public Nodo(T dato) { // Constructor que inicializa el nodo con un dato
         this.dato = dato;
@@ -20,7 +21,7 @@ public class Nodo <T> {
         this.dato = dato;
     }
 
-    public Nodo<T> getderecha() {
+    public INodo<T> getderecha() {
         return derecha;
     }
 
@@ -28,12 +29,17 @@ public class Nodo <T> {
         this.derecha = derecha;
     }
 
-    public Nodo<T> getizquierda() {
+    public INodo<T> getizquierda() {
         return izquierda;
     }
 
-    public void setizquierda(Nodo<T> izquierda) {
+    public void setizquierda(INodo<T> izquierda) {
         this.izquierda = izquierda;
+    }
+
+    @Override
+    public void setderecha(INodo<T> derecha) {
+        this.derecha = derecha;
     }
     
 
