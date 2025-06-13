@@ -1,7 +1,7 @@
 package interfaces;
 
-import modelos.Persona;
 import java.util.List;
+import modelos.Persona;
 
 public interface IGrafo {
     void agregarNodo(Persona persona);

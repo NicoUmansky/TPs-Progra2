@@ -5,8 +5,8 @@ import interfaces.INodoGrafo;
 import java.util.*;
 
 public class Grafo implements IGrafo {
-    private List<INodoGrafo> nodos;
-    private int[][] matrizAdyacencia;
+    private final List<INodoGrafo> nodos;
+    private final int[][] matrizAdyacencia;
     private boolean esDirigido;
 
     public Grafo(int cantidadNodos, boolean esDirigido) {
@@ -16,7 +16,7 @@ public class Grafo implements IGrafo {
     }
 
     @Override
-    public void agregarNodo(modelos.Persona persona) {
+    public void agregarNodo(Persona persona) {
         nodos.add(new NodoGrafo(persona, nodos.size()));
     }
 
