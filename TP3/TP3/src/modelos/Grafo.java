@@ -4,8 +4,8 @@ import interfaces.IGrafo;
 import interfaces.INodoGrafo;
 import java.util.*;
 
-public class Grafo implements IGrafo {
-    private final List<INodoGrafo> nodos;
+public class Grafo<T> implements IGrafo<T> {
+    private final List<INodoGrafo<T>> nodos;
     private final int[][] matrizAdyacencia;
     private boolean esDirigido;
 
@@ -16,8 +16,8 @@ public class Grafo implements IGrafo {
     }
 
     @Override
-    public void agregarNodo(Persona persona) {
-        nodos.add(new NodoGrafo(persona, nodos.size()));
+    public void agregarNodo(T dato) {
+        nodos.add(new NodoGrafo<>(dato, nodos.size()));
     }
 
     @Override
@@ -87,12 +87,7 @@ public class Grafo implements IGrafo {
     }
 
     @Override
-    public List<INodoGrafo> getNodos() {
+    public List<INodoGrafo<T>> getNodos() {
         return nodos;
     }
 }
-
-/*
-Para que el grafo sea dirigido, simplemente inicializa el grafo con el parámetro esDirigido=true.
-El recorrido DFS y BFS funciona igual para grafos dirigidos y no dirigidos.
-*/

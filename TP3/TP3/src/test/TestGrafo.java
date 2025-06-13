@@ -5,7 +5,7 @@ import modelos.Persona;
 
 public class TestGrafo {
     public static void main(String[] args) {
-        Grafo grafo = new Grafo(3, false); // No dirigido
+        Grafo<Persona> grafo = new Grafo<>(3, false); // No dirigido
         grafo.agregarNodo(new Persona("Ana", 20));
         grafo.agregarNodo(new Persona("Luis", 22));
         grafo.agregarNodo(new Persona("Sofía", 21));

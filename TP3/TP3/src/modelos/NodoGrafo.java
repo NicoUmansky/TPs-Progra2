@@ -2,22 +2,22 @@ package modelos;
 
 import interfaces.INodoGrafo;
 
-public class NodoGrafo implements INodoGrafo {
-    private Persona dato;
+public class NodoGrafo<T> implements INodoGrafo<T> {
+    private T dato;
     private int indice;
 
-    public NodoGrafo(Persona dato, int indice) {
+    public NodoGrafo(T dato, int indice) {
         this.dato = dato;
         this.indice = indice;
     }
 
     @Override
-    public Persona getDato() {
+    public T getDato() {
         return dato;
     }
 
     @Override
-    public void setDato(Persona dato) {
+    public void setDato(T dato) {
         this.dato = dato;
     }
 
