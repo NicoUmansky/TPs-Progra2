@@ -6,18 +6,30 @@ import java.util.*;
 
 public class Grafo<T> implements IGrafo<T> {
     private final List<INodoGrafo<T>> nodos;
-    private final int[][] matrizAdyacencia;
+    private int[][] matrizAdyacencia;
     private boolean esDirigido;
 
-    public Grafo(int cantidadNodos, boolean esDirigido) {
+    public Grafo(boolean esDirigido) {
         this.nodos = new ArrayList<>();
-        this.matrizAdyacencia = new int[cantidadNodos][cantidadNodos];
+        this.matrizAdyacencia = new int[0][0];
         this.esDirigido = esDirigido;
     }
 
     @Override
     public void agregarNodo(T dato) {
         nodos.add(new NodoGrafo<>(dato, nodos.size()));
+        expandirMatriz();
+    }
+
+    private void expandirMatriz() {
+        int n = nodos.size();
+        int[][] nuevaMatriz = new int[n][n];
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1; j++) {
+                nuevaMatriz[i][j] = matrizAdyacencia[i][j];
+            }
+        }
+        matrizAdyacencia = nuevaMatriz;
     }
 
     @Override
