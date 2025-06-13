@@ -32,7 +32,7 @@ public class TestGrafo {
         grafo2.agregarArista(3, 0);
 
         grafo2.mostrarMatrizAdyacencia();
-        grafo2.dfs(0);
-        grafo2.bfs(0);
+        grafo2.dfs(3);
+        grafo2.bfs(1);
     }
 }

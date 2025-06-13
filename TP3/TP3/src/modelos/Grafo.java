@@ -4,9 +4,12 @@ import interfaces.IGrafo;
 import interfaces.INodoGrafo;
 import java.util.*;
 
+// Clase que representa un grafo con matriz de adyacencia y nodos genéricos
+// Soporta grafos dirigidos y no dirigidos 
+
 public class Grafo<T> implements IGrafo<T> {
-    private final List<INodoGrafo<T>> nodos;
-    private int[][] matrizAdyacencia;
+    private final List<INodoGrafo<T>> nodos; 
+    private int[][] matrizAdyacencia; // Matriz de adyacencia - representa las conexiones 
     private boolean esDirigido;
 
     public Grafo(boolean esDirigido) {
@@ -18,8 +21,10 @@ public class Grafo<T> implements IGrafo<T> {
     @Override
     public void agregarNodo(T dato) {
         nodos.add(new NodoGrafo<>(dato, nodos.size()));
-        expandirMatriz();
+        expandirMatriz(); // Se actualiza la matriz para agregar una nueva fila/columna 
     }
+
+    // Expande la matriz de adyacencia al agregar un nuevo nodo 
 
     private void expandirMatriz() {
         int n = nodos.size();
@@ -36,7 +41,7 @@ public class Grafo<T> implements IGrafo<T> {
     public void agregarArista(int origen, int destino) {
         matrizAdyacencia[origen][destino] = 1;
         if (!esDirigido) {
-            matrizAdyacencia[destino][origen] = 1;
+            matrizAdyacencia[destino][origen] = 1; // Si no es dirigido, también se marca la conexión inversa
         }
     }
 
@@ -47,17 +52,19 @@ public class Grafo<T> implements IGrafo<T> {
         dfsRec(inicio, visitado);
         System.out.println();
     }
+    // Función recursiva para realizar DFS 
 
     private void dfsRec(int actual, boolean[] visitado) {
         visitado[actual] = true;
         System.out.print(nodos.get(actual) + " ");
         for (int i = 0; i < nodos.size(); i++) {
             if (matrizAdyacencia[actual][i] == 1 && !visitado[i]) {
-                dfsRec(i, visitado);
+                dfsRec(i, visitado); // Llamada recursiva si hay conexión y aún no fue visitado
             }
         }
     }
 
+    // Realizar recorrido en anchura (BFS) desde un nodo inicial 
     @Override
     public void bfs(int inicio) {
         boolean[] visitado = new boolean[nodos.size()];
@@ -88,6 +95,7 @@ public class Grafo<T> implements IGrafo<T> {
             System.out.println();
         }
     }
+    // Cambia la configuración del grado dirigido a no dirigido 
 
     public void setDirigido(boolean dirigido) {
         this.esDirigido = dirigido;
