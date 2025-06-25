@@ -27,7 +27,9 @@ public class TestDijkstra {
         IGrafo<String> mapaCiudad = new Grafo<>(ubicaciones);
         // Aristas principales con pesos aleatorios
         mapaCiudad.agregarArista("BaseAmbulancia", "Interseccion1", rand.nextInt(15) + 1);
-       // mapaCiudad.agregarArista("BaseAmbulancia", "HospitalCentral", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("BaseAmbulancia", "Escuela", rand.nextInt(15) + 1);
+
+        // mapaCiudad.agregarArista("BaseAmbulancia", "HospitalCentral", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion1", "Interseccion2", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion1", "HospitalCentral", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion2", "Interseccion3", rand.nextInt(15) + 1);
@@ -75,7 +77,24 @@ public class TestDijkstra {
                 System.out.println("No hay camino a " + h.getNombre() + " (" + h.getDireccion() + ")");
             } else {
                 System.out.println("- " + h.getNombre() + " (" + h.getDireccion() + "):");
-                System.out.println("  Recorrido: " + String.join(" --> ", camino));
+                // Imprimir el recorrido con los pesos de las aristas
+                StringBuilder recorridoConPesos = new StringBuilder();
+                for (int i = 0; i < camino.size() - 1; i++) {
+                    String origen = camino.get(i);
+                    String destino = camino.get(i + 1);
+                    int peso = -1;
+                    // Buscar el peso de la arista origen -> destino
+                    for (Object objArista : mapaCiudad.getAdyacentes(origen)) {
+                        Grafo.Arista<String> arista = (Grafo.Arista<String>) objArista;
+                        if (mapaCiudad.getNodo(arista.destino).equals(destino)) {
+                            peso = arista.peso;
+                            break;
+                        }
+                    }
+                    recorridoConPesos.append(origen).append(" --").append(peso).append("--> ");
+                }
+                recorridoConPesos.append(camino.get(camino.size() - 1));
+                System.out.println("  Recorrido: " + recorridoConPesos);
                 System.out.println("  Distancia mínima: " + resultado.distancias[h.getId()]);
             }
         }
