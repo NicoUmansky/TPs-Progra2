@@ -17,45 +17,48 @@ public class TestDijkstra {
             "Interseccion1",
             "Interseccion2",
             "Interseccion3",
-            "HospitalCentral",
-            "HospitalNorte",
-            "HospitalSur",
-            "HospitalOeste",
+            "Hospital1",
+            "Hospital2",
+            "Hospital3",
+            "Hospital4",
             "Plaza",
-            "Escuela"
+            "Escuela",
+            "Hospital5"
         );
         IGrafo<String> mapaCiudad = new Grafo<>(ubicaciones);
         // Aristas principales con pesos aleatorios
         mapaCiudad.agregarArista("BaseAmbulancia", "Interseccion1", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("BaseAmbulancia", "Escuela", rand.nextInt(15) + 1);
 
-        // mapaCiudad.agregarArista("BaseAmbulancia", "HospitalCentral", rand.nextInt(15) + 1);
+        // mapaCiudad.agregarArista("BaseAmbulancia", "Hospital1", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion1", "Interseccion2", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Interseccion1", "HospitalCentral", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion1", "Hospital1", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion2", "Interseccion3", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion3", "BaseAmbulancia", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Interseccion3", "Interseccion2", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalCentral", "Interseccion1", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalCentral", "Interseccion2", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalCentral", "Interseccion3", rand.nextInt(15) + 1);
-        //mapaCiudad.agregarArista("BaseAmbulancia", "HospitalNorte", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Interseccion2", "HospitalNorte", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Interseccion1", "HospitalSur", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Interseccion3", "HospitalSur", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalSur", "Plaza", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Plaza", "HospitalOeste", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalOeste", "Escuela", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("Escuela", "HospitalNorte", rand.nextInt(15) + 1);
-        mapaCiudad.agregarArista("HospitalOeste", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital1", "Interseccion1", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital1", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital1", "Interseccion3", rand.nextInt(15) + 1);
+        //mapaCiudad.agregarArista("BaseAmbulancia", "Hospital2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion2", "Hospital2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion1", "Hospital3", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion3", "Hospital3", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital3", "Plaza", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Plaza", "Hospital4", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital4", "Escuela", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Escuela", "Hospital2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital4", "Interseccion2", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Plaza", "Interseccion1", rand.nextInt(15) + 1);
         mapaCiudad.agregarArista("Escuela", "Interseccion3", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Hospital4", "Hospital5", rand.nextInt(15) + 1);
 
         // Registrar hospitales fuera del grafo
         List<IHospital> hospitales = Arrays.asList(
-            new Hospital(mapaCiudad.getIndiceNodo("HospitalCentral"), "Hospital Central", "Av. Principal 123"),
-            new Hospital(mapaCiudad.getIndiceNodo("HospitalNorte"), "Hospital Norte", "Calle 45 N° 200"),
-            new Hospital(mapaCiudad.getIndiceNodo("HospitalSur"), "Hospital Sur", "Av. del Sur 555"),
-            new Hospital(mapaCiudad.getIndiceNodo("HospitalOeste"), "Hospital Oeste", "Av. del Oeste 789")
+            new Hospital(mapaCiudad.getIndiceNodo("Hospital1"), "Clinica Zabala", "Cabildo y Zabala"),
+            new Hospital(mapaCiudad.getIndiceNodo("Hospital2"), "Los Arcos", "Juan B. Justo y Paraguay"),
+            new Hospital(mapaCiudad.getIndiceNodo("Hospital3"), "Fernandez", "Cerviño y Bulnes"),
+            new Hospital(mapaCiudad.getIndiceNodo("Hospital4"), "Garrahan", "Pichincha y Brasil"),
+            new Hospital(mapaCiudad.getIndiceNodo("Hospital5"), "Mater Dei", "Castex y Salguero")
         );
 
         String baseAmbulancia = "BaseAmbulancia";
@@ -76,7 +79,7 @@ public class TestDijkstra {
             if (camino.isEmpty()) {
                 System.out.println("No hay camino a " + h.getNombre() + " (" + h.getDireccion() + ")");
             } else {
-                System.out.println("- " + h.getNombre() + " (" + h.getDireccion() + "):");
+                System.out.println("- " + mapaCiudad.getNodo(h.getId()) + ": " + h.getNombre() + " (" + h.getDireccion() + "):");
                 // Imprimir el recorrido con los pesos de las aristas
                 StringBuilder recorridoConPesos = new StringBuilder();
                 for (int i = 0; i < camino.size() - 1; i++) {
