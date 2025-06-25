@@ -1,39 +1,62 @@
 package modelo;
 
+import interfaces.IGrafo;
 import java.util.*;
 
-public class Grafo {
-    private int V; // Número de vértices
-    private List<List<Arista>> adj;
+public class Grafo<T> implements IGrafo<T> {
+    private int V; // Número de nodos
+    private List<List<Arista<T>>> adj;
+    private List<T> nodos;
 
-    public Grafo(int V) {
-        this.V = V;
+    public Grafo(List<T> nodos) {
+        this.nodos = nodos;
+        this.V = nodos.size();
         adj = new ArrayList<>();
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
     }
 
-    public void agregarArista(int origen, int destino, int peso) {
-        adj.get(origen).add(new Arista(destino, peso));
-        // Si es no dirigido, descomentar la siguiente línea:
-        // adj.get(destino).add(new Arista(origen, peso));
+    // Agrega una arista entre dos nodos de tipo T
+    public void agregarArista(T origen, T destino, int peso) {
+        int idxOrigen = nodos.indexOf(origen);
+        int idxDestino = nodos.indexOf(destino);
+        if (idxOrigen != -1 && idxDestino != -1) {
+            adj.get(idxOrigen).add(new Arista<>(idxDestino, peso));
+        }
     }
 
-    public List<Arista> getAdyacentes(int v) {
-        return adj.get(v);
+    // Devuelve la lista de adyacentes de un nodo de tipo T
+    public List<Arista<T>> getAdyacentes(T nodo) {
+        int idx = nodos.indexOf(nodo);
+        if (idx != -1) {
+            return adj.get(idx);
+        }
+        return Collections.emptyList();
     }
 
+    // Devuelve la cantidad de nodos
     public int getV() {
         return V;
     }
-}
 
-class Arista {
-    int destino;
-    int peso;
-    public Arista(int destino, int peso) {
-        this.destino = destino;
-        this.peso = peso;
+    // Devuelve el nodo en la posición i
+    public T getNodo(int i) {
+        return nodos.get(i);
+    }
+
+    // Devuelve el índice de un nodo
+    public int getIndiceNodo(T nodo) {
+        return nodos.indexOf(nodo);
+    }
+
+    // Clase interna para representar una arista
+    public static class Arista<T> {
+        public int destino;
+        public int peso;
+        public Arista(int destino, int peso) {
+            this.destino = destino;
+            this.peso = peso;
+        }
     }
 }

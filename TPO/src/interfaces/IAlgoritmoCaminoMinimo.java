@@ -1,5 +1,5 @@
 package interfaces;
 
-public interface IAlgoritmoCaminoMinimo {
-    int[] calcularCaminosMinimos(IGrafo grafo, int origen);
+public interface IAlgoritmoCaminoMinimo<T> {
+    int[] calcularCaminosMinimos(IGrafo<T> grafo, T origen);
 }

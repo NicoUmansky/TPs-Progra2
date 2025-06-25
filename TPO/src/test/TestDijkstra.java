@@ -1,27 +1,105 @@
 package test;
 
+import interfaces.IAlgoritmoCaminoMinimo;
+import interfaces.IGrafo;
+import interfaces.IHospital;
+import java.util.*;
 import modelo.Dijkstra;
 import modelo.Grafo;
+import modelo.Hospital;
 
 public class TestDijkstra {
     public static void main(String[] args) {
-        Grafo grafo = new Grafo(5);
-        grafo.agregarArista(0, 1, 10);
-        grafo.agregarArista(0, 4, 5);
-        grafo.agregarArista(1, 2, 1);
-        grafo.agregarArista(1, 4, 2);
-        grafo.agregarArista(2, 3, 4);
-        grafo.agregarArista(3, 0, 7);
-        grafo.agregarArista(3, 2, 6);
-        grafo.agregarArista(4, 1, 3);
-        grafo.agregarArista(4, 2, 9);
-        grafo.agregarArista(4, 3, 2);
+        Random rand = new Random();
+        // Definir los nodos de la ciudad
+        List<String> ubicaciones = Arrays.asList(
+            "BaseAmbulancia",
+            "Interseccion1",
+            "Interseccion2",
+            "Interseccion3",
+            "HospitalCentral",
+            "HospitalNorte",
+            "HospitalSur",
+            "HospitalOeste",
+            "Plaza",
+            "Escuela"
+        );
+        IGrafo<String> mapaCiudad = new Grafo<>(ubicaciones);
+        // Aristas principales con pesos aleatorios
+        mapaCiudad.agregarArista("BaseAmbulancia", "Interseccion1", rand.nextInt(15) + 1);
+       // mapaCiudad.agregarArista("BaseAmbulancia", "HospitalCentral", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion1", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion1", "HospitalCentral", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion2", "Interseccion3", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion3", "BaseAmbulancia", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion3", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalCentral", "Interseccion1", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalCentral", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalCentral", "Interseccion3", rand.nextInt(15) + 1);
+        //mapaCiudad.agregarArista("BaseAmbulancia", "HospitalNorte", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion2", "HospitalNorte", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion1", "HospitalSur", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Interseccion3", "HospitalSur", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalSur", "Plaza", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Plaza", "HospitalOeste", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalOeste", "Escuela", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Escuela", "HospitalNorte", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("HospitalOeste", "Interseccion2", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Plaza", "Interseccion1", rand.nextInt(15) + 1);
+        mapaCiudad.agregarArista("Escuela", "Interseccion3", rand.nextInt(15) + 1);
 
-        int origen = 0;
-        int[] distancias = Dijkstra.dijkstra(grafo, origen);
-        System.out.println("Distancias mínimas desde el nodo " + origen + ":");
+        // Registrar hospitales fuera del grafo
+        List<IHospital> hospitales = Arrays.asList(
+            new Hospital(mapaCiudad.getIndiceNodo("HospitalCentral"), "Hospital Central", "Av. Principal 123"),
+            new Hospital(mapaCiudad.getIndiceNodo("HospitalNorte"), "Hospital Norte", "Calle 45 N° 200"),
+            new Hospital(mapaCiudad.getIndiceNodo("HospitalSur"), "Hospital Sur", "Av. del Sur 555"),
+            new Hospital(mapaCiudad.getIndiceNodo("HospitalOeste"), "Hospital Oeste", "Av. del Oeste 789")
+        );
+
+        String baseAmbulancia = "BaseAmbulancia";
+        IAlgoritmoCaminoMinimo<String> algoritmo = new Dijkstra<>();
+        int[] distancias = algoritmo.calcularCaminosMinimos(mapaCiudad, baseAmbulancia);
+        System.out.println("Distancias mínimas desde la base de ambulancia (" + baseAmbulancia + "):");
         for (int i = 0; i < distancias.length; i++) {
-            System.out.println("A nodo " + i + ": " + distancias[i]);
+            System.out.println("A ubicación " + mapaCiudad.getNodo(i) + ": " + distancias[i]);
         }
+
+        // Calcular caminos mínimos y predecesores
+        Dijkstra.ResultadoDijkstra<String> resultado = ((Dijkstra<String>) algoritmo).calcularTodo(mapaCiudad, baseAmbulancia);
+
+        // Mostrar el mejor recorrido y la distancia mínima para llegar a cada hospital
+        System.out.println("\nRecorrido y distancia mínima desde la base de ambulancia a cada hospital:");
+        for (IHospital h : hospitales) {
+            List<String> camino = resultado.reconstruirCamino(mapaCiudad.getNodo(h.getId()));
+            if (camino.isEmpty()) {
+                System.out.println("No hay camino a " + h.getNombre() + " (" + h.getDireccion() + ")");
+            } else {
+                System.out.println("- " + h.getNombre() + " (" + h.getDireccion() + "):");
+                System.out.println("  Recorrido: " + String.join(" --> ", camino));
+                System.out.println("  Distancia mínima: " + resultado.distancias[h.getId()]);
+            }
+        }
+
+        // Buscar el hospital más cercano
+        IHospital hospitalCercano = null;
+        int minDist = Integer.MAX_VALUE;
+        for (IHospital h : hospitales) {
+            if (distancias[h.getId()] < minDist) {
+                minDist = distancias[h.getId()];
+                hospitalCercano = h;
+            }
+        }
+        if (hospitalCercano != null) {
+            System.out.println("\nLa ambulancia debe ir al hospital más cercano:");
+            System.out.println("Nombre: " + hospitalCercano.getNombre());
+            System.out.println("Dirección: " + hospitalCercano.getDireccion());
+            System.out.println("Ubicación (nodo): " + mapaCiudad.getNodo(hospitalCercano.getId()));
+            System.out.println("Distancia mínima desde la base: " + distancias[hospitalCercano.getId()]);
+        } else {
+            System.out.println("\nNo hay hospitales registrados en el grafo.");
+        }
+
+
+        
     }
 }
