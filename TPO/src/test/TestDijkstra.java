@@ -117,11 +117,16 @@ public class TestDijkstra {
             System.out.println("Dirección: " + hospitalCercano.getDireccion());
             System.out.println("Ubicación (nodo): " + mapaCiudad.getNodo(hospitalCercano.getId()));
             System.out.println("Distancia mínima desde la base: " + distancias[hospitalCercano.getId()]);
+
+            // Visualizar el grafo destacando el hospital más cercano
+            Set<String> nodosDestacados = Collections.singleton(mapaCiudad.getNodo(hospitalCercano.getId()).toString());
+            modelo.VisualizadorGrafo.visualizar(mapaCiudad, nodosDestacados);
         } else {
             System.out.println("\nNo hay hospitales registrados en el grafo.");
+            // Visualizar el grafo sin destacar ningún nodo
+            modelo.VisualizadorGrafo.visualizar(mapaCiudad, Collections.emptySet());
         }
 
 
-        
     }
 }
