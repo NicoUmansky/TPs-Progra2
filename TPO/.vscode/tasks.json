@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Limpiar bin",
+            "type": "shell",
+            "command": "if exist bin rmdir /s /q bin && mkdir bin || mkdir bin",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Compilar Java",
+            "type": "shell",
+            "command": "javac -d bin -cp \"lib/*\" src/**/*.java",
+            "problemMatcher": [],
+            "group": "build",
+            "dependsOn": ["Limpiar bin"]
+        },
+        {
+            "label": "Ejecutar Java",
+            "type": "shell",
+            "command": "java -cp \"bin;lib/*\" test.TestDijkstra",
+            "problemMatcher": [],
+            "group": "test",
+            "dependsOn": ["Compilar Java"]
+        }
+    ]
+}
