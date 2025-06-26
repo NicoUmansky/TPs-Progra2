@@ -21,6 +21,7 @@ public class Grafo<T> implements IGrafo<T> {
     }
 
     // Agrega una arista dirigida desde 'origen' hasta 'destino' con un peso dado
+    @Override
     public void agregarArista(T origen, T destino, int peso) {
         int idxOrigen = nodos.indexOf(origen);   // Busca el índice del nodo origen
         int idxDestino = nodos.indexOf(destino); // Busca el índice del nodo destino
@@ -30,6 +31,7 @@ public class Grafo<T> implements IGrafo<T> {
     }
 
     // Devuelve la lista de aristas salientes (adyacentes) desde el nodo dado
+    @Override
     public List<Arista<T>> getAdyacentes(T nodo) {
         int idx = nodos.indexOf(nodo); // Busca el índice del nodo
         if (idx != -1) {
@@ -39,16 +41,19 @@ public class Grafo<T> implements IGrafo<T> {
     }
 
     // Devuelve la cantidad total de nodos en el grafo
+    @Override
     public int getV() {
         return V;
     }
 
     // Devuelve el nodo que se encuentra en la posición i
+    @Override
     public T getNodo(int i) {
         return nodos.get(i);
     }
 
     // Devuelve el índice correspondiente al nodo dado
+    @Override
     public int getIndiceNodo(T nodo) {
         return nodos.indexOf(nodo); // Si no existe, retorna -1
     }
