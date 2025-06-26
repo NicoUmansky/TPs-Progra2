@@ -1,6 +1,7 @@
 package modelo;
+import interfaces.INodo;
 
-public class Nodo implements interfaces.INodo {
+public class Nodo implements INodo {
     int id;
     int dist;
 
