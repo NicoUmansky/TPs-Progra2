@@ -88,6 +88,7 @@ public class TestDijkstra {
                     int peso = -1;
                     // Buscar el peso de la arista origen -> destino
                     for (Object objArista : mapaCiudad.getAdyacentes(origen)) {
+                        @SuppressWarnings("unchecked") //El compilador no puede garantizar que el objeto es una arista de tipo String
                         Grafo.Arista<String> arista = (Grafo.Arista<String>) objArista;
                         if (mapaCiudad.getNodo(arista.destino).equals(destino)) {
                             peso = arista.peso;
@@ -119,7 +120,7 @@ public class TestDijkstra {
             System.out.println("Distancia mínima desde la base: " + distancias[hospitalCercano.getId()]);
 
             // Visualizar el grafo destacando el hospital más cercano
-            Set<String> nodosDestacados = Collections.singleton(mapaCiudad.getNodo(hospitalCercano.getId()).toString());
+            Set<String> nodosDestacados = Collections.singleton(mapaCiudad.getNodo(hospitalCercano.getId()));
             modelo.VisualizadorGrafo.visualizar(mapaCiudad, nodosDestacados);
         } else {
             System.out.println("\nNo hay hospitales registrados en el grafo.");

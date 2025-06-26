@@ -4,10 +4,10 @@ import interfaces.IHospital;
 
 // Clase que representa un hospital concreto, implementando la interfaz IHospital
 public class Hospital implements IHospital {
-
-    private int id;             // Identificador único del hospital
-    private String nombre;      // Nombre del hospital
-    private String direccion;   // Dirección física del hospital
+    //Agregue final a las varaibles de instancia para indicar que no cambiarán después de la inicialización
+    private final int id;             // Identificador único del hospital
+    private final String nombre;      // Nombre del hospital
+    private final String direccion;   // Dirección física del hospital
 
     // Constructor: inicializa un hospital con su id, nombre y dirección
     public Hospital(int id, String nombre, String direccion) {

@@ -5,10 +5,10 @@ import java.util.*;
 
 // Implementación concreta de un grafo dirigido y ponderado usando listas de adyacencia
 public class Grafo<T> implements IGrafo<T> {
-
-    private int V; // Número de nodos en el grafo
-    private List<List<Arista<T>>> adj; // Lista de adyacencia que guarda las aristas salientes por nodo
-    private List<T> nodos; // Lista que guarda los nodos del grafo
+    //Agregue final a las varaibles de instancia para indicar que no cambiarán después de la inicialización
+    private final int V; // Número de nodos en el grafo
+    private final List<List<Arista<T>>> adj; // Lista de adyacencia que guarda las aristas salientes por nodo
+    private final List<T> nodos; // Lista que guarda los nodos del grafo
 
     // Constructor: inicializa el grafo con una lista de nodos dada
     public Grafo(List<T> nodos) {
