@@ -85,9 +85,9 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
 
             // Procesar todas las aristas salientes del nodo actual
             for (Object objArista : grafo.getAdyacentes(grafo.getNodo(u))) {
-                @SuppressWarnings("unchecked") //El compilador no puede garantizar que el objeto es una arista
+                //@SuppressWarnings("unchecked") //El compilador no puede garantizar que el objeto es una arista
                 // Cast seguro ya que sabemos que las adyacentes son de tipo Arista<T>, por eso suprimimos la advertencia
-                /// REVISAR: Podemos mejorarlo, cambiando la declaración y el retorno de getAdyacentes para que sea genérico
+                ///Comentamo la supresión de advertencia porque no fue vista en clase
                 Grafo.Arista<T> arista = (Grafo.Arista<T>) objArista;
                 int v = arista.getDestino();
                 int peso = arista.getPeso();

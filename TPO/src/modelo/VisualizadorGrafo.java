@@ -24,7 +24,7 @@ public class VisualizadorGrafo {
         for (int i = 0; i < grafo.getV(); i++) {
             T origen = grafo.getNodo(i);
             for (Object objArista : grafo.getAdyacentes(origen)) {
-                modelo.Grafo.Arista<T> arista = (modelo.Grafo.Arista<T>) objArista;
+                modelo.Grafo.Arista<T> arista = (modelo.Grafo.Arista<T>) objArista; //El compilador no puede garantizar que el objeto es una arista, nosotros si
                 String idOrigen = origen.toString();
                 String idDestino = grafo.getNodo(arista.getDestino()).toString();
                 String edgeId = idOrigen + "-" + idDestino;
