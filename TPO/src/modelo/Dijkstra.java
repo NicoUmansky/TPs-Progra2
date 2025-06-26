@@ -9,16 +9,33 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
 
     // Clase interna que encapsula los resultados del algoritmo de Dijkstra
     public static class ResultadoDijkstra<T> {
-        public int[] distancias;        // Distancia mínima desde el origen a cada nodo
-        public int[] predecesores;      // Nodo anterior en el camino más corto
-        public IGrafo<T> grafo;         // Referencia al grafo sobre el cual se ejecutó el algoritmo
-        public T origen;                // Nodo origen desde el cual se calcularon las distancias
+        private int[] distancias;        // Distancia mínima desde el origen a cada nodo
+        private int[] predecesores;      // Nodo anterior en el camino más corto
+        private IGrafo<T> grafo;         // Referencia al grafo sobre el cual se ejecutó el algoritmo
+        private T origen;                // Nodo origen desde el cual se calcularon las distancias
 
         public ResultadoDijkstra(int[] distancias, int[] predecesores, IGrafo<T> grafo, T origen) {
             this.distancias = distancias;
             this.predecesores = predecesores;
             this.grafo = grafo;
             this.origen = origen;
+        }
+
+        // Métodos getter para acceder a los datos del resultado
+        public int[] getDistancias() {
+            return distancias;
+        }
+
+        public int[] getPredecesores() {
+            return predecesores;
+        }
+
+        public IGrafo<T> getGrafo() {
+            return grafo;
+        }
+
+        public T getOrigen() {
+            return origen;
         }
 
         // Devuelve el camino óptimo desde el nodo origen hasta el nodo destino
@@ -55,13 +72,13 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
         dist[idxOrigen] = 0;                           // Distancia del origen a sí mismo es 0
 
         // Cola de prioridad para seleccionar el nodo con menor distancia estimada
-        PriorityQueue<Nodo> pq = new PriorityQueue<>(Comparator.comparingInt(n -> n.dist));
+        PriorityQueue<Nodo> pq = new PriorityQueue<>(Comparator.comparingInt(n -> n.getDist()));
         pq.add(new Nodo(idxOrigen, 0));
 
         // Bucle principal de Dijkstra
         while (!pq.isEmpty()) {
             Nodo actual = pq.poll();
-            int u = actual.id;
+            int u = actual.getId();
 
             if (visitado[u]) continue;             // Saltar si el nodo ya fue visitado
             visitado[u] = true;
@@ -72,8 +89,8 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
                 // Cast seguro ya que sabemos que las adyacentes son de tipo Arista<T>, por eso suprimimos la advertencia
                 /// REVISAR: Podemos mejorarlo, cambiando la declaración y el retorno de getAdyacentes para que sea genérico
                 Grafo.Arista<T> arista = (Grafo.Arista<T>) objArista;
-                int v = arista.destino;
-                int peso = arista.peso;
+                int v = arista.getDestino();
+                int peso = arista.getPeso();
 
                 // Relajación: actualizar si se encontró un camino más corto
                 if (!visitado[v] && dist[u] + peso < dist[v]) {
@@ -91,6 +108,6 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
     // Implementación del método de la interfaz: solo retorna las distancias
     @Override
     public int[] calcularCaminosMinimos(IGrafo<T> grafo, T origen) {
-        return calcularTodo(grafo, origen).distancias;
+        return calcularTodo(grafo, origen).getDistancias();
     }
 }

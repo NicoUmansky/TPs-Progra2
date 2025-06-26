@@ -2,8 +2,8 @@ package modelo;
 import interfaces.INodo;
 
 public class Nodo implements INodo {
-    int id;
-    int dist;
+    private int id;
+    private int dist;
 
     public Nodo(int id, int dist) {
         this.id = id;

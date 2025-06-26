@@ -60,12 +60,31 @@ public class Grafo<T> implements IGrafo<T> {
 
     // Clase interna que representa una arista dirigida con peso
     public static class Arista<T> {
-        public int destino; // Índice del nodo destino
-        public int peso;    // Peso de la arista
+        private int destino; // Índice del nodo destino
+        private int peso;    // Peso de la arista
 
         public Arista(int destino, int peso) {
             this.destino = destino;
             this.peso = peso;
         }
+
+        // Métodos getter para acceder a los datos de la arista
+        public int getDestino() {
+            return destino;
+        }
+
+        public int getPeso() {
+            return peso;
+        }
+
+        public void setDestino(int destino) {
+            this.destino = destino;
+        }
+
+        public void setPeso(int peso) {
+            this.peso = peso;
+        }
+
+        
     }
 }

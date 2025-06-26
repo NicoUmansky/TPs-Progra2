@@ -26,11 +26,11 @@ public class VisualizadorGrafo {
             for (Object objArista : grafo.getAdyacentes(origen)) {
                 modelo.Grafo.Arista<T> arista = (modelo.Grafo.Arista<T>) objArista;
                 String idOrigen = origen.toString();
-                String idDestino = grafo.getNodo(arista.destino).toString();
+                String idDestino = grafo.getNodo(arista.getDestino()).toString();
                 String edgeId = idOrigen + "-" + idDestino;
                 if (graph.getEdge(edgeId) == null) { // Evitar duplicados
                     Edge edge = graph.addEdge(edgeId, idOrigen, idDestino, true);
-                    edge.setAttribute("ui.label", arista.peso);
+                    edge.setAttribute("ui.label", arista.getPeso());
                 }
             }
         }

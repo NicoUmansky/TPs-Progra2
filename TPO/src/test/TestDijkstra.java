@@ -90,8 +90,8 @@ public class TestDijkstra {
                     for (Object objArista : mapaCiudad.getAdyacentes(origen)) {
                         @SuppressWarnings("unchecked") //El compilador no puede garantizar que el objeto es una arista de tipo String
                         Grafo.Arista<String> arista = (Grafo.Arista<String>) objArista;
-                        if (mapaCiudad.getNodo(arista.destino).equals(destino)) {
-                            peso = arista.peso;
+                        if (mapaCiudad.getNodo(arista.getDestino()).equals(destino)) {
+                            peso = arista.getPeso();
                             break;
                         }
                     }
@@ -99,7 +99,7 @@ public class TestDijkstra {
                 }
                 recorridoConPesos.append(camino.get(camino.size() - 1));
                 System.out.println("  Recorrido: " + recorridoConPesos);
-                System.out.println("  Distancia mínima: " + resultado.distancias[h.getId()]);
+                System.out.println("  Distancia mínima: " + resultado.getDistancias()[h.getId()]);
             }
         }
 
