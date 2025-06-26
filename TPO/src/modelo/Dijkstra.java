@@ -93,15 +93,4 @@ public class Dijkstra<T> implements IAlgoritmoCaminoMinimo<T> {
     public int[] calcularCaminosMinimos(IGrafo<T> grafo, T origen) {
         return calcularTodo(grafo, origen).distancias;
     }
-
-    // Clase auxiliar para representar un nodo en la cola de prioridad
-    static class Nodo {
-        int id;     // Índice del nodo en el grafo
-        int dist;   // Distancia estimada desde el origen
-
-        public Nodo(int id, int dist) {
-            this.id = id;
-            this.dist = dist;
-        }
-    }
 }
