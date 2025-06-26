@@ -31,7 +31,7 @@ public class VisualizadorGrafo {
             T origen = grafo.getNodo(i);
             for (Object objArista : grafo.getAdyacentes(origen)) {
                 // Cast explícito necesario: sabemos que el objeto es una arista de tipo Grafo.Arista<T>
-                modelo.Grafo.Arista<T> arista = (modelo.Grafo.Arista<T>) objArista;
+                Grafo.Arista<T> arista = (Grafo.Arista<T>) objArista;
 
                 String idOrigen = origen.toString();
                 String idDestino = grafo.getNodo(arista.getDestino()).toString();
